@@ -1,25 +1,32 @@
+/**
+ *
+ * HomePage
+ *
+ */
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { NavBar } from '../NavBar';
-import { Masthead } from './Masthead';
-import { Features } from './Features';
-import { PageWrapper } from 'app/components/PageWrapper';
+import { useSelector } from 'react-redux';
+
+import { selectAuth } from 'auth/slice';
+
+import { Header } from 'app/components/Header';
+import { Container } from 'app/components/Container';
 
 export function HomePage() {
+  const auth = useSelector(selectAuth);
   return (
     <>
       <Helmet>
-        <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React Boilerplate application homepage"
-        />
+        <title>HomePage</title>
+        <meta name="description" content="Description of HomePage" />
       </Helmet>
-      <NavBar />
-      <PageWrapper>
-        <Masthead />
-        <Features />
-      </PageWrapper>
+      <Header />
+      <Container>
+        <h1>Home</h1>
+        {auth.isAuth && <div>You are logged in.</div>}
+        {!auth.isAuth && <div>You are not logged in.</div>}
+      </Container>
     </>
   );
 }

@@ -13,12 +13,9 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import * as serviceWorker from 'serviceWorker';
-
 import 'sanitize.css/sanitize.css';
 
-// Initialize languages
-import './locales/i18n';
-
+// Import root app
 import { App } from 'app';
 
 import { HelmetProvider } from 'react-helmet-async';
@@ -27,12 +24,14 @@ import { configureAppStore } from 'store/configureStore';
 
 import { ThemeProvider } from 'styles/theme/ThemeProvider';
 
-// Observe loading of Inter (to remove 'Inter', remove the <link> tag in
-// the index.html file and this observer)
-const openSansObserver = new FontFaceObserver('Inter', {});
+// Initialize languages
+import './locales/i18n';
+
+// Observe loading of the font
+const fontObserver = new FontFaceObserver('Lato', {});
 
 // When Inter is loaded, add a font-family using Inter to the body
-openSansObserver.load().then(() => {
+fontObserver.load().then(() => {
   document.body.classList.add('fontLoaded');
 });
 
@@ -53,7 +52,6 @@ const ConnectedApp = ({ Component }: Props) => (
     </ThemeProvider>
   </Provider>
 );
-
 const render = (Component: typeof App) => {
   ReactDOM.render(<ConnectedApp Component={Component} />, MOUNT_NODE);
 };

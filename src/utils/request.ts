@@ -1,3 +1,6 @@
+import { Cookies } from 'react-cookie';
+import config from 'utils/config';
+
 export class ResponseError extends Error {
   public response: Response;
 
@@ -48,7 +51,37 @@ export async function request(
   url: string,
   options?: RequestInit,
 ): Promise<{} | { err: ResponseError }> {
-  const fetchResponse = await fetch(url, options);
+  if (options && options.method === 'post') {
+    // or put, patch, delete etc
+    if (getToken() === undefined) {
+      if (config.api.sessionUrl) {
+        await request(config.api.sessionUrl);
+      }
+    }
+  }
+
+  const globalOptions = {
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-XSRF-TOKEN': getToken(),
+    },
+  };
+
+  const mergedOptions = Object.assign({}, options, globalOptions);
+
+  const fetchResponse = await fetch(url, mergedOptions);
   const response = checkStatus(fetchResponse);
   return parseJSON(response);
+}
+
+function getToken() {
+  const cookies = new Cookies();
+  const token = cookies.get('XSRF-TOKEN');
+  // if (token !== undefined) {
+  //   token.replace('%3D%3D', '==');
+  // }
+  return token;
 }
