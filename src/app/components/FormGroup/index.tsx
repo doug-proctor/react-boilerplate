@@ -1,6 +1,6 @@
 /**
  *
- * Container
+ * FormGroup
  *
  */
 import React from 'react';
@@ -10,12 +10,10 @@ interface Props {
   children: React.ReactNode;
 }
 
-export function Container(props: Props) {
+export function FormGroup(props: Props) {
   return <Div>{props.children}</Div>;
 }
 
 const Div = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  margin-bottom: 1rem;
 `;

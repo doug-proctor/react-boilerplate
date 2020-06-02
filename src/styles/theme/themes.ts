@@ -1,10 +1,12 @@
 export const lightTheme = {
   colors: {
-    black: '#000000',
-    white: '#FFFFFF',
-    red: '#FF0000',
-    green: '#00FF00',
-    blue: '#0000FF',
+    black: '#333333',
+    greyLight: '#AAAAAA',
+    greyDark: '#999999',
+    white: '#ffffff',
+    red: '#ab3f3f',
+    green: '#089b08',
+    blue: '#3434a0',
   },
   fontSizes: {
     xs: '10px',

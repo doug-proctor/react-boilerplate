@@ -4,7 +4,7 @@
  *
  */
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -14,6 +14,8 @@ import route from 'app/routes';
 
 import { deleteUser, selectAuth } from 'auth/slice';
 
+import { A } from 'app/components/A';
+import { Button } from 'app/components/Button';
 import { Container } from 'app/components/Container';
 
 interface Props {}
@@ -35,26 +37,30 @@ export function Header(props: Props) {
     <Wrapper>
       <Container>
         <Flex>
-          <Link to={route('HOME')}>Home</Link>
+          <A to={route('HOME')}>Home</A>
           <NavItems>
             {auth.isAuth && (
               <NavItem>
-                <Link to={route('THINGS')}>Things</Link>
+                <A to={route('THINGS')}>Things</A>
               </NavItem>
             )}
             {auth.isAuth && (
               <NavItem>
-                <button onClick={logout}>Logout {auth.user.name}</button>
+                <Button secondary sm onClick={logout}>
+                  Logout {auth.user.name}
+                </Button>
               </NavItem>
             )}
             {!auth.isAuth && (
               <NavItem>
-                <Link to={route('LOGIN')}>Login</Link>
+                <A to={route('LOGIN')}>Login</A>
               </NavItem>
             )}
             {!auth.isAuth && (
               <NavItem>
-                <Link to={route('REGISTER')}>Register</Link>
+                <Button primary sm to={route('REGISTER')}>
+                  Register
+                </Button>
               </NavItem>
             )}
           </NavItems>
@@ -65,16 +71,18 @@ export function Header(props: Props) {
 }
 
 const Wrapper = styled.div`
-  border-bottom: 1px solid ${props => props.theme.colors.black};
-  padding: 1rem;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+  padding: 1rem 0;
 `;
 
 const Flex = styled.div`
-  display: flex;
   justify-content: space-between;
+  align-items: center;
+  display: flex;
 `;
 
 const NavItems = styled.div`
+  align-items: center;
   display: flex;
 `;
 

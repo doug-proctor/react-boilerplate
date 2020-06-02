@@ -5,8 +5,10 @@ import { Formik } from 'formik';
 import config from 'utils/config';
 import { request } from 'utils/request';
 
+import { Input } from 'app/components/Input';
 import { Button } from 'app/components/Button';
-import { Spacer } from 'app/components/Spacer';
+import { FormLabel } from 'app/components/FormLabel';
+import { FormGroup } from 'app/components/FormGroup';
 import { ValidationError } from 'app/components/ValidationError';
 
 export default function Form(props) {
@@ -57,8 +59,10 @@ export default function Form(props) {
         return (
           <form onSubmit={handleSubmit}>
             <ValidationError>{status}</ValidationError>
-            <Spacer mb={20}>
-              <input
+
+            <FormGroup>
+              <FormLabel htmlFor="name">Your name</FormLabel>
+              <Input
                 name="name"
                 type="text"
                 onBlur={handleBlur}
@@ -69,9 +73,11 @@ export default function Form(props) {
               {errors.name && touched.name && (
                 <ValidationError>{errors.name}</ValidationError>
               )}
-            </Spacer>
-            <Spacer mb={20}>
-              <input
+            </FormGroup>
+
+            <FormGroup>
+              <FormLabel htmlFor="email">Email address</FormLabel>
+              <Input
                 name="email"
                 type="email"
                 onBlur={handleBlur}
@@ -82,9 +88,10 @@ export default function Form(props) {
               {errors.email && touched.email && (
                 <ValidationError>{errors.email}</ValidationError>
               )}
-            </Spacer>
-            <Spacer mb={20}>
-              <input
+            </FormGroup>
+            <FormGroup>
+              <FormLabel htmlFor="name">Password</FormLabel>
+              <Input
                 name="password"
                 type="password"
                 onBlur={handleBlur}
@@ -95,7 +102,7 @@ export default function Form(props) {
               {errors.password && touched.password && (
                 <ValidationError>{errors.password}</ValidationError>
               )}
-            </Spacer>
+            </FormGroup>
             <Button primary submit disabled={isSubmitting}>
               Register
             </Button>

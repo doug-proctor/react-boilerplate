@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import config from 'utils/config';
 import { request } from 'utils/request';
 
+import { Input } from 'app/components/Input';
 import { Button } from 'app/components/Button';
 import { Spacer } from 'app/components/Spacer';
 import { ValidationError } from 'app/components/ValidationError';
@@ -56,7 +57,7 @@ export default function Form(props) {
           <form onSubmit={handleSubmit}>
             <ValidationError>{status}</ValidationError>
             <Spacer mb={20}>
-              <input
+              <Input
                 name="email"
                 type="email"
                 onBlur={handleBlur}
@@ -69,7 +70,7 @@ export default function Form(props) {
               )}
             </Spacer>
             <Spacer mb={20}>
-              <input
+              <Input
                 name="password"
                 type="password"
                 onBlur={handleBlur}

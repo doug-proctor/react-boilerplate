@@ -10,6 +10,7 @@ export interface ButtonStyleProps {
 }
 
 export const buttonStyles = css<ButtonStyleProps>`
+  text-transform: uppercase;
   background: transparent;
   vertical-align: middle;
   text-decoration: none;
@@ -18,7 +19,6 @@ export const buttonStyles = css<ButtonStyleProps>`
   text-align: center;
   border-radius: 2px;
   user-select: none;
-  font-weight: 700;
   cursor: pointer;
   outline: none;
   border: none;
@@ -40,23 +40,22 @@ export const buttonStyles = css<ButtonStyleProps>`
     props.secondary ? `border: 2px solid ${props.theme.colors.blue};` : ''}
    
 
-  // Sizes
-  // Medium button (default)
-  line-height: 50px;
-  padding: 0 25px;
-  font-size: 14px;
-  height: 50px;
-
+  // Size
+  height: 40px;
+  font-size: 16px;
+  padding: 0 1rem;
+  line-height: 42px;
+  
   ${props =>
     props.sm
-      ? 'padding: 0 20px; font-size: 12px; height: 40px; line-height: 40px;'
+      ? 'padding: 0 0.5rem; font-size: 14px; height: 30px; line-height: 30px;'
       : ''}
 
   // Now reduce the line heights for normal-sized bordered buttons
-  ${props => (props.secondary ? 'line-height: 48px;' : '')}
+  ${props => (props.secondary ? 'line-height: 40px;' : '')}
   
   // Same for line heights for small bordered buttons
-  ${props => (props.secondary && props.sm ? 'line-height: 38px;' : '')}
+  ${props => (props.secondary && props.sm ? 'line-height: 28px;' : '')}
  
   // Disabled
   ${props => (props.disabled ? 'opacity: 0.5;' : '')}
